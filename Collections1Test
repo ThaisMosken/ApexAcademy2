@@ -1,0 +1,8 @@
+@isTest
+public class DoubleContactsTest {
+    @isTest static void createAccount() {
+        Account AccTest = new Account();
+        AccTest.Name = 'AccName';
+        insert AccTest;
+    }
+}
