@@ -1,0 +1,15 @@
+trigger DoubleContacts on Account (after insert) {
+    
+    for(Account newAcc : Trigger.new) {
+        Contact contact1 = new Contact();
+        contact1.LastName = 'Last Name';
+        contact1.FirstName = 'First Name';
+        contact1.Email = 'lastname.firstname@gmail.com';
+        contact1.AccountId = newAcc.Id;
+        insert contact1;
+
+        Contact contact2 = contact1.clone();
+        insert contact2;
+    }
+    
+}
