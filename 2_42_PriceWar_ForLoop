@@ -1,0 +1,41 @@
+trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
+
+    for (Lead myLead : Trigger.new) {
+
+        List<Integer> competitorPrices = new List<Integer>();
+        List<Integer> competitorPricesReordered = new List<Integer>();
+        List<String> competitorNames = new List<String>();
+        Integer lowestPrice;
+
+        // Se não for encontrado um competidor que faça sentido, apagar campo        
+        myLead.Leading_Competitor__c = null;
+
+        //Adicionar valores à lista apenas se Concorrente e Preço estiverem preenchidos
+        if (myLead.Competitor_1__c != null && myLead.Competitor_1_Price__c != null) {
+            competitorPrices.add(myLead.Competitor_1_Price__c.intValue());
+            competitorNames.add(myLead.Competitor_1__c);
+        } if (myLead.Competitor_2__c != null && myLead.Competitor_2_Price__c != null) {
+            competitorPrices.add(myLead.Competitor_2_Price__c.intValue());
+            competitorNames.add(myLead.Competitor_2__c);
+        } if (myLead.Competitor_3__c != null && myLead.Competitor_3_Price__c != null) {
+            competitorPrices.add(myLead.Competitor_3_Price__c.intValue());
+            competitorNames.add(myLead.Competitor_3__c);
+        } else {
+            return;
+        }
+
+        //Reordenar a lista de preços para encontrar o mais barato
+        competitorPricesReordered = competitorPrices.clone();
+        competitorPricesReordered.sort();
+        lowestPrice = competitorPricesReordered.get(0);
+        
+        //Buscar nome do competidor com o preço mais barato
+        for (Integer i = 0; i < competitorPrices.size(); i++) {
+
+            if (lowestPrice == competitorPrices.get(i)) {
+                myLead.Leading_Competitor__c = competitorNames.get(i);
+                return;
+            }
+        }
+    }
+}
