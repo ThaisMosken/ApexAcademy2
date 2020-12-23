@@ -1,0 +1,22 @@
+@isTest
+public class AssignLeadGradeTest {
+    @isTest static void createLead() {
+        Lead testLead     = new Lead();
+        testLead.LastName = 'testName';
+        testLead.Company  = 'testCompany';
+        testLead.Score__c = null;
+        insert testLead;
+        
+        testLead.Score__c = 100;
+        update testLead;
+         
+        testLead.Score__c = 95;
+        update testLead;
+         
+        testLead.Score__c = 85;
+        update testLead;
+         
+        testLead.Score__c = 30;
+        update testLead;
+    }
+}
