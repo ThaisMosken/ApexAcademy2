@@ -6,6 +6,8 @@ trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
         List<Integer> competitorPricesReordered = new List<Integer>();
         List<String> competitorNames = new List<String>();
         Integer lowestPrice;
+        
+        myLead.Leading_Competitor__c = null;
 
         if (myLead.Competitor_1__c != null && myLead.Competitor_1_Price__c != null) {
             competitorPrices.add(myLead.Competitor_1_Price__c.intValue());
@@ -21,7 +23,8 @@ trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
         }
 
         competitorPricesReordered = competitorPrices.clone();
-        lowestPrice = competitorPricesReordered.sort().get(0);
+        competitorPricesReordered.sort();
+        lowestPrice = competitorPricesReordered.get(0);
 
         Integer position = 0;
         
