@@ -21,9 +21,7 @@ trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
         }
 
         competitorPricesReordered = competitorPrices.clone();
-        competitorPricesReordered.sort();
-
-        lowestPrice = competitorPricesReordered.get(0);
+        lowestPrice = competitorPricesReordered.sort().get(0);
 
         Integer position = 0;
         
