@@ -7,13 +7,13 @@ trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
         List<String> competitorNames = new List<String>();
         Integer lowestPrice;
 
-        if (myLead.Competitor_1__c != null) {
+        if (myLead.Competitor_1__c != null && myLead.Competitor_1_Price__c != null) {
             competitorPrices.add(myLead.Competitor_1_Price__c.intValue());
             competitorNames.add(myLead.Competitor_1__c);
-        } if (myLead.Competitor_2__c != null) {
+        } if (myLead.Competitor_2__c != null && myLead.Competitor_2_Price__c != null) {
             competitorPrices.add(myLead.Competitor_2_Price__c.intValue());
             competitorNames.add(myLead.Competitor_2__c);
-        } if (myLead.Competitor_3__c != null) {
+        } if (myLead.Competitor_3__c != null && myLead.Competitor_3_Price__c != null) {
             competitorPrices.add(myLead.Competitor_3_Price__c.intValue());
             competitorNames.add(myLead.Competitor_3__c);
         } else {
@@ -31,6 +31,7 @@ trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
         
             if (orderedPrice == lowestPrice) {
                 myLead.Leading_Competitor__c = competitorNames.get(position);
+                return;
             } else {
                 position++;
             }
