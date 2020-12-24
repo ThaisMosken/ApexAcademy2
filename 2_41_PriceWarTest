@@ -9,8 +9,8 @@ public class LeadingCompetitorUpdateTest {
         
         testLead.Competitor_1_Price__c = 1000;
         testLead.Competitor_1__c = 'Microsoft';
-        testLead.Competitor_2_Price__c = 15000;
-        testLead.Competitor_2__c = 'Salesforce';
+        testLead.Competitor_2_Price__c = null;
+        testLead.Competitor_2__c = null;
         testLead.Competitor_3_Price__c = 5000;
         testLead.Competitor_3__c = 'Google';
         

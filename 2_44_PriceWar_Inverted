@@ -1,0 +1,35 @@
+trigger LeadingCompetitorUpdate on Lead (before insert, before update) {
+
+    for (Lead myLead : Trigger.new) {
+
+        List<Decimal> competitorPrices = new List<Decimal>();
+        competitorPrices.add(myLead.Competitor_1_Price__c);
+        competitorPrices.add(myLead.Competitor_2_Price__c);
+        competitorPrices.add(myLead.Competitor_3_Price__c);
+
+        List<String> competitorNames = new List<String>();
+        competitorNames.add(myLead.Competitor_1__c);
+        competitorNames.add(myLead.Competitor_2__c);
+        competitorNames.add(myLead.Competitor_3__c);
+        
+        Decimal highestPrice;
+        Integer highestPricePosition;
+
+        for (Integer i = 0; i < competitorPrices.size(); i++) {
+
+            Decimal currentPrice = competitorPrices.get(i);
+            
+            //Solução oficial alterada para não popular campo vazio
+            if ((highestPrice == null || currentPrice > highestPrice) && competitorNames.get(i) != null) {
+                highestPrice = currentPrice;
+                highestPricePosition = i;
+            }
+        }
+
+        if (highestPricePosition != null) {
+            myLead.Leading_Competitor__c = competitorNames.get(highestPricePosition);
+        } else {
+            myLead.Leading_Competitor__c = null;
+        }
+    }
+}
