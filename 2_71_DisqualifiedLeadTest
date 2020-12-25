@@ -1,0 +1,11 @@
+@isTest
+private class DisqualifiedLeadTest {
+	@isTest static void createLead() {
+		Lead testLead = new Lead();
+        testLead.Company = 'testCompany';
+        testLead.Status = 'New';
+        testLead.LastName = 'test';
+        
+        insert testLead;
+    }        
+}

@@ -1,0 +1,12 @@
+trigger DisqualifiedLead on Lead (before insert) {
+
+    for(Lead newLead : Trigger.new) {
+
+        String testString = 'test';
+
+        if ((newLead.FirstName != null && newLead.FirstName.equalsIgnoreCase(testString)) || (newLead.LastName != null && newLead.LastName.equalsIgnoreCase(testString))) {
+
+            newLead.Status = 'Disqualified';
+        }
+    }
+}
