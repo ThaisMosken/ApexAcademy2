@@ -1,5 +1,5 @@
 @isTest
-public class WarrantySummaryTest {
+private class WarrantySummaryTest {
     @isTest static void createCase() {
         Case testCase = new Case();
         testCase.Product_Purchase_Date__c = Date.today().addDays(-2);

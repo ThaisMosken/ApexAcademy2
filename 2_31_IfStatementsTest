@@ -1,5 +1,5 @@
 @isTest
-public class AssignLeadGradeTest {
+private class AssignLeadGradeTest {
     @isTest static void createLead() {
         Lead testLead     = new Lead();
         testLead.LastName = 'testName';

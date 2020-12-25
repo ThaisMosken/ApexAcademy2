@@ -1,5 +1,5 @@
 @isTest
-public class DoubleContactsTest {
+private class DoubleContactsTest {
     @isTest static void createAccount() {
         Account AccTest = new Account();
         AccTest.Name = 'AccName';
