@@ -1,0 +1,22 @@
+trigger MultipleAccounts on Account (after insert) {
+
+    for(Account newAcc : Trigger.new) {
+        if (newAcc.NumberOfEmployees > 99) {
+            List<Opportunity> newOpps = new List<Opportunity>();
+
+            for(Integer i=0; i < 10; i++) {
+                
+                Opportunity newOpp = new Opportunity();
+                newOpp.AccountId = newAcc.Id;
+                newOpp.StageName = 'Prospecting';
+                newOpp.CloseDate = Date.today() + 60;
+                newOpp.Name = 'New opp from ' + newAcc.Name + (i + 1);
+
+                newOpps.add(newOpp);
+            }
+
+        insert newOpps;
+
+        }
+    }
+}

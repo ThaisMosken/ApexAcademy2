@@ -1,0 +1,10 @@
+@isTest
+public class MultipleAccountsTest {
+	@isTest static void createAccount() {
+		Account testAccount = new Account();
+        testAccount.Name = 'TestName';
+        testAccount.NumberOfEmployees = 200;
+        
+        insert testAccount;
+    }        
+}
