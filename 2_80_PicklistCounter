@@ -1,0 +1,14 @@
+trigger PicklistCounter on Account (before insert, before update) {
+
+    for(Account newAccount : Trigger.new) {
+        if (newAccount.Multipicklist_test__c != null) {
+            List<String> MultipicklistChoices = newAccount.Multipicklist_test__c.split(';');
+            newAccount.Counter__c = MultipicklistChoices.size();
+
+        } else {
+            newAccount.Counter__c = 0;
+        }
+
+        
+    }
+}
